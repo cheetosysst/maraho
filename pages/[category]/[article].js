@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { gruvboxDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 export default function article({ id, article, data, markdown }) {
 	// TODO Organize styles, combine common styles as consts.
@@ -25,6 +26,7 @@ export default function article({ id, article, data, markdown }) {
 					<div className="container mx-auto py-10 px-10">
 						<ReactMarkdown
 							remarkPlugins={[remarkGfm]}
+							rehypePlugins={[rehypeRaw]}
 							components={{
 								h1({
 									node,
@@ -154,6 +156,7 @@ export default function article({ id, article, data, markdown }) {
 									...props
 								}) {
 									// TODO I prefer using list-inside class from tailwind, but it breaks in when the li contains <p>.
+									const { ordered, depth } = props;
 									if (className === "contains-task-list")
 										return (
 											<ul
@@ -170,7 +173,8 @@ export default function article({ id, article, data, markdown }) {
 														? ""
 														: " [&>*]:pb-2"
 												}`}
-												{...props}
+												ordered={ordered.toString()}
+												depth={depth.toString()}
 											>
 												{children}
 											</ul>
@@ -409,7 +413,6 @@ export default function article({ id, article, data, markdown }) {
 													? ""
 													: className
 											}`}
-											{...props}
 										>
 											{children}
 										</th>

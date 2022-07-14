@@ -6,14 +6,13 @@ import config from "../config";
 import Navbar from "./navbar.component.js";
 
 export default function Layout({ children }) {
-
 	const [links, setLinks] = useState([]);
 
 	useEffect(() => {
 		let tempLinks = [];
 		for (let i = 0; i < config.navbar.list.length; i++) {
 			tempLinks.push(
-				<li className="uppercase">
+				<li className="uppercase" key={"SideLinks" + i}>
 					<Link href={"/" + config.navbar.list[i]}>
 						{config.navbar.list[i]}
 					</Link>

@@ -23,7 +23,7 @@ export default function article({ id, article, data, markdown }) {
 					<title>{article + " | " + config.name}</title>
 				</Head>
 				<main>
-					<div className="container mx-auto py-10 px-10">
+					<div className="container mx-auto py-10 md:px-20 px-5">
 						<ReactMarkdown
 							remarkPlugins={[remarkGfm]}
 							rehypePlugins={[rehypeRaw]}

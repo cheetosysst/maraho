@@ -21,7 +21,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<div className="px-4">
+			<div className="container mx-auto">
 				<div className="navbar bg-base-300 mt-3 rounded-xl shadow">
 					<div className="flex-none md:hidden">
 						<label

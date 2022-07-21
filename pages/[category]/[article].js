@@ -495,10 +495,10 @@ export default function article({ id, article, data, markdown }) {
 export async function getStaticPaths() {
 	const pathCategory = path.join(process.cwd(), "content");
 	const categories = fs.readdirSync(pathCategory);
-
+	
 	let paths = [];
 	categories.map((category) => {
-		const articles = fs.readdirSync(path.join(pathCategory, category));
+		const articles = fs.readdirSync(path.join(pathCategory, category)).filter(path => !path.includes("category.json"));
 
 		articles.map((article) => {
 			paths.push({

@@ -9,5 +9,27 @@ var exports = (module.exports = {
 			"docs",
 			"posts"
 		]
+	},
+	author: {
+		provider: "github",
+		username: "cheetosysst",
+		name: "張辰",
+		twitter: "Thect_36",
+	},
+	repo: {
+		repos: [
+			{
+				name:"cheetosysst/os"
+			},
+			{
+				name:"cheetosysst/EMU6502"
+			},
+			{
+				name:"cheetosysst/cheetosysst"
+			},
+			{
+				name:"cheetosysst/wikitextCrawler"
+			},
+		]	
 	}
 });

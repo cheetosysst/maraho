@@ -83,7 +83,7 @@ export function getCategories(categories) {
 }
 
 export async function getStaticPaths() {
-	const categories = fs.readdirSync(path.join(process.cwd(), "content"));
+	const categories = fs.readdirSync(path.join(process.cwd(), "content")).filter(path=>!path.includes("index.md"));
 	const paths = getCategories(categories);
 	return {
 		paths,

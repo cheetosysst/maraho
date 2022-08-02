@@ -36,7 +36,7 @@ export default function Layout({ children }) {
 					type="checkbox"
 					className="drawer-toggle"
 				/>
-				<div className="drawer-content">
+				<div className="drawer-content pb-10">
 					<Navbar />
 					{children}
 				</div>

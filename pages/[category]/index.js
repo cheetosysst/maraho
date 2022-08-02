@@ -1,18 +1,27 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from "next/image";
+import Link from "next/link";
 import config from "../../config";
 import Layout from "../../components/main.layout";
 import fs from "fs";
 import path from "path";
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import Paginate from "../../components/paginate.component";
 
 export default function Category({ id, articles, category }) {
 	const [articleCards, setArticleCards] = useState([]);
+	const [page, setPage] = useState(1);
+	const { query } = useRouter();
+
+	useEffect(() => {
+		if (query.page === undefined) return;
+		setPage(Number(query.page));
+	}, [query.page]);
 
 	useEffect(() => {
 		let tempList = [];
-		for (let i = 0; i < articles.length; i++) {
+		for (let i = 0 + (page - 1) * 10; i < articles.length + (page - 1) * 10; i++) {
+			if (articles[i]===undefined) break;
 			let tagList = [];
 			let time = new Date(articles[i].timestamp);
 			for (let j = 0; j < articles[i].tags.length; j++) {
@@ -48,7 +57,7 @@ export default function Category({ id, articles, category }) {
 			);
 		}
 		setArticleCards(tempList);
-	}, [articles, id]);
+	}, [articles, id, page]);
 
 	return (
 		<>
@@ -66,6 +75,7 @@ export default function Category({ id, articles, category }) {
 					<div className="container w-9/12 mx-auto bg-neutral rounded-xl shadow-xl hover:shadow-2xl duration-300 transition-all overflow-hidden">
 						{articleCards}
 					</div>
+					<Paginate start={1} end={articles.length/10} active={page} path={id} />
 				</main>
 			</Layout>
 		</>
@@ -83,7 +93,9 @@ export function getCategories(categories) {
 }
 
 export async function getStaticPaths() {
-	const categories = fs.readdirSync(path.join(process.cwd(), "content")).filter(path=>!path.includes("index.md"));
+	const categories = fs
+		.readdirSync(path.join(process.cwd(), "content"))
+		.filter((path) => !path.includes("index.md"));
 	const paths = getCategories(categories);
 	return {
 		paths,
@@ -101,10 +113,11 @@ export async function getStaticProps({ params }) {
 	);
 	const categoryData = JSON.parse(categoryDataRaw.toString());
 
-	let articleData = [];
 	articles = articles.filter((item) => {
 		return item !== "category.json";
 	});
+
+	let articleData = [];
 	for (let i = 0; i < articles.length; i++) {
 		let articleJson = fs.readFileSync(
 			path.join(

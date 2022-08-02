@@ -95,6 +95,10 @@ export default function Home({ category, markdown }) {
 		);
 	}, []);
 
+	const githubAvatarLoader = ({ src, width, quality }) => {
+		return `${src}?v=4?imwidth=${width}`;
+	};
+
 	return (
 		<>
 			<Head>
@@ -117,7 +121,7 @@ export default function Home({ category, markdown }) {
 									<Image
 										className="rounded-xl shadow-lg"
 										src={avatar}
-										loader={"src"}
+										loader={githubAvatarLoader}
 										layout="responsive"
 										width={256}
 										height={256}

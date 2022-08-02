@@ -1,9 +1,18 @@
+import Head from "next/head";
 import Link from "next/link";
 import Layout from "../components/main.layout";
+import config from "../config";
 
 function Error({ statusCode }) {
 	return (
 		<Layout>
+			<Head>
+				<title>
+					{statusCode ? statusCode : "Error"}
+					{" - "}
+					{config.name}
+				</title>
+			</Head>
 			<div className="container mx-auto pt-10">
 				<p className="flex text-7xl font-light justify-center">
 					{statusCode ? statusCode : ""}

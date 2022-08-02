@@ -98,7 +98,10 @@ export default function Home({ category, markdown }) {
 	return (
 		<>
 			<Head>
-				<title>{config.name}</title>
+				<title>
+					{"Home - "}
+					{config.name}
+				</title>
 				<meta
 					name={config.meta.name}
 					content={config.meta.description}
@@ -230,7 +233,7 @@ export function getStaticProps() {
 	const markdown = fs.readFileSync(
 		path.join(process.cwd(), "content", "index.md")
 	);
-	
+
 	return {
 		props: {
 			category,

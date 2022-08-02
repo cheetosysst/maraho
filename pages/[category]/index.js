@@ -66,7 +66,12 @@ export default function Category({ id, articles, category }) {
 	return (
 		<>
 			<Head>
-				<title>{category.name + " | " + config.name}</title>
+				<title>
+					{category.name}
+					{" - "}
+					{config.name}
+				</title>
+				<meta name="robots" content="noindex,nofollow" />
 			</Head>
 			<Layout>
 				<main>

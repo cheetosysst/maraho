@@ -10,11 +10,15 @@ export default function article({ article, markdown }) {
 		<>
 			<Layout>
 				<Head>
-					<title>{article + " | " + config.name}</title>
+					<title>
+						{article}
+						{" - "}
+						{config.name}
+					</title>
 				</Head>
 				<main>
 					<div className="container mx-auto py-10 md:px-20 px-5">
-						<Markdown markdown={markdown}/>
+						<Markdown markdown={markdown} />
 					</div>
 				</main>
 			</Layout>

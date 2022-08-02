@@ -20,8 +20,12 @@ export default function Category({ id, articles, category }) {
 
 	useEffect(() => {
 		let tempList = [];
-		for (let i = 0 + (page - 1) * 10; i < articles.length + (page - 1) * 10; i++) {
-			if (articles[i]===undefined) break;
+		for (
+			let i = 0 + (page - 1) * 10;
+			i < articles.length + (page - 1) * 10;
+			i++
+		) {
+			if (articles[i] === undefined) break;
 			let tagList = [];
 			let time = new Date(articles[i].timestamp);
 			for (let j = 0; j < articles[i].tags.length; j++) {
@@ -75,7 +79,12 @@ export default function Category({ id, articles, category }) {
 					<div className="container w-9/12 mx-auto bg-neutral rounded-xl shadow-xl hover:shadow-2xl duration-300 transition-all overflow-hidden">
 						{articleCards}
 					</div>
-					<Paginate start={1} end={articles.length/10} active={page} path={id} />
+					<Paginate
+						start={1}
+						end={articles.length / 10}
+						active={page}
+						path={id}
+					/>
 				</main>
 			</Layout>
 		</>

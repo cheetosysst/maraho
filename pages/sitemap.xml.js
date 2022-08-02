@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 /**
- * Generates sitemap index 
+ * Generates sitemap index
  * @param {*} posts list of sub indexs
  * @returns sitemap xml
  */
@@ -14,7 +14,8 @@ function generateSiteMapIndex(posts) {
 			return `
 	<sitemap>
 		<loc>${`${config.url}/${id}/sitemap.xml`}</loc>
-	</sitemap>`;})
+	</sitemap>`;
+		})
 		.join("")}
 </sitemapindex>
  `;

@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 /**
- * Generates sitemap index 
+ * Generates sitemap index
  * @param {*} posts list of sub indexs
  * @returns sitemap xml
  */
@@ -14,7 +14,8 @@ function generateSiteMap(posts, category) {
 			return `
 	<url>
 		<loc>${`${config.url}/${category}/${id}`}</loc>
-	</url>`;})
+	</url>`;
+		})
 		.join("")}
 </urlset>
  `;
@@ -26,7 +27,6 @@ function generateSiteMap(posts, category) {
 function SiteMap() {}
 
 export async function getServerSideProps({ res, params }) {
-	console.log(params);
 	const articles = fs
 		.readdirSync(path.join(process.cwd(), "content", params.category))
 		.filter((e) => e !== "category.json");

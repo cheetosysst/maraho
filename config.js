@@ -1,15 +1,12 @@
 var exports = (module.exports = {
 	name: "Maraho",
-	url:"http://localhost:3000",
+	url: "http://localhost:3000",
 	meta: {
 		name: "Maraho - next.js based blog framework.",
-		description:"Maraho is an next.js based blog system."
+		description: "Maraho is an next.js based blog system.",
 	},
 	navbar: {
-		list:[
-			"docs",
-			"posts"
-		]
+		list: ["docs", "posts"],
 	},
 	author: {
 		provider: "github",
@@ -20,17 +17,17 @@ var exports = (module.exports = {
 	repo: {
 		repos: [
 			{
-				name:"cheetosysst/os"
+				name: "cheetosysst/os",
 			},
 			{
-				name:"cheetosysst/EMU6502"
+				name: "cheetosysst/EMU6502",
 			},
 			{
-				name:"cheetosysst/cheetosysst"
+				name: "cheetosysst/cheetosysst",
 			},
 			{
-				name:"cheetosysst/wikitextCrawler"
+				name: "cheetosysst/wikitextCrawler",
 			},
-		]	
-	}
+		],
+	},
 });

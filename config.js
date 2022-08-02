@@ -1,5 +1,6 @@
 var exports = (module.exports = {
 	name: "Maraho",
+	url:"http://localhost:3000",
 	meta: {
 		name: "Maraho - next.js based blog framework.",
 		description:"Maraho is an next.js based blog system."

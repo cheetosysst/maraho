@@ -6,7 +6,7 @@ var exports = (module.exports = {
 		description: "Maraho is an next.js based blog system.",
 	},
 	navbar: {
-		list: ["docs", "posts"],
+		list: ["docs", "demos"],
 	},
 	author: {
 		provider: "github",

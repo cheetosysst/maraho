@@ -1,0 +1,5 @@
+// robots.txt
+// Do not delete this file!
+
+User-agent: *
+Allow: /

@@ -11,22 +11,22 @@ var exports = (module.exports = {
 	author: {
 		provider: "github",
 		username: "cheetosysst",
-		name: "張辰",
+		name: "Maraho",
 		twitter: "Thect_36",
 	},
 	repo: {
 		repos: [
 			{
-				name: "cheetosysst/os",
+				name: "cheetosysst/maraho",
 			},
 			{
-				name: "cheetosysst/EMU6502",
+				name: "vercel/next.js",
 			},
 			{
-				name: "cheetosysst/cheetosysst",
+				name: "saadeghi/daisyui",
 			},
 			{
-				name: "cheetosysst/wikitextCrawler",
+				name: "tailwindlabs/tailwindcss",
 			},
 		],
 	},

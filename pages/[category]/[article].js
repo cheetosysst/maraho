@@ -4,17 +4,28 @@ import path from "path";
 import Layout from "../../components/main.layout";
 import config from "../../config";
 import Markdown from "../../components/markdown.component";
+import MetaTags from "../../components/meta.component";
 
-export default function article({ article, markdown }) {
+export default function article({ article, markdown, data }) {
+	const getDescription = () => {
+		if (data.description !== undefined && data.description !== "")
+			return data.description;
+		if (markdown !== undefined && markdown !== "")
+			return markdown.substring(0, 125) + "...";
+		return config.meta.description;
+	};
+
 	return (
 		<>
 			<Layout>
 				<Head>
-					<title>
-						{article}
-						{" - "}
-						{config.name}
-					</title>
+					<title>{`${data.title} - ${config.name}`}</title>
+					<MetaTags
+						title={`${data.title} - ${config.name}`}
+						url={`${config.url}/`}
+						description={`${getDescription()}`}
+						name={`${data.title} - ${config.name}`}
+					/>
 				</Head>
 				<main>
 					<div className="container mx-auto py-10 md:px-20 px-5">

@@ -17,6 +17,7 @@ import { AiOutlineStar } from "@react-icons/all-files/ai/AiOutlineStar";
 import { AiOutlineFork } from "@react-icons/all-files/ai/AiOutlineFork";
 import { MdLanguage } from "@react-icons/all-files/md/MdLanguage";
 import Markdown from "../components/markdown.component";
+import MetaTags from "../components/meta.component";
 
 export default function Home({ category, markdown }) {
 	const [avatar, setAvatar] = useState("/defaultuser.png");
@@ -102,13 +103,12 @@ export default function Home({ category, markdown }) {
 	return (
 		<>
 			<Head>
-				<title>
-					{"Home - "}
-					{config.name}
-				</title>
-				<meta
-					name={config.meta.name}
-					content={config.meta.description}
+				<title>{`Home - ${config.name}`}</title>
+				<MetaTags
+					title={`Home - ${config.meta.name}`}
+					url={`${config.url}/`}
+					description={`${config.meta.description}`}
+					name={`${config.name}`}
 				/>
 			</Head>
 

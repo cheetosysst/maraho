@@ -7,6 +7,7 @@ import Layout from "../../components/main.layout";
 import fs from "fs";
 import path from "path";
 import Paginate from "../../components/paginate.component";
+import MetaTags from "../../components/meta.component";
 
 export default function Category({ id, articles, category }) {
 	const [articleCards, setArticleCards] = useState([]);
@@ -66,12 +67,14 @@ export default function Category({ id, articles, category }) {
 	return (
 		<>
 			<Head>
-				<title>
-					{category.name}
-					{" - "}
-					{config.name}
-				</title>
+				<title>{`${category.name} - ${config.name}`}</title>
 				<meta name="robots" content="noindex,nofollow" />
+				<MetaTags
+					title={`${category.name} - ${config.name}`}
+					url={`${config.url}/`}
+					description={`${category.description}`}
+					name={`${category.name} - ${config.name}`}
+				/>
 			</Head>
 			<Layout>
 				<main>

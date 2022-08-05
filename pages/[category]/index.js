@@ -74,6 +74,7 @@ export default function Category({ id, articles, category }) {
 					url={`${config.url}/`}
 					description={`${category.description}`}
 					name={`${category.name} - ${config.name}`}
+					image={`${config.url}/${config.meta.image}`}
 				/>
 			</Head>
 			<Layout>

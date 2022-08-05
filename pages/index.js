@@ -109,6 +109,7 @@ export default function Home({ category, markdown }) {
 					url={`${config.url}/`}
 					description={`${config.meta.description}`}
 					name={`${config.name}`}
+					image={`${config.url}/${config.meta.image}`}
 				/>
 			</Head>
 

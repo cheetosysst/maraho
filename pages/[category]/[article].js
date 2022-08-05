@@ -25,6 +25,7 @@ export default function article({ article, markdown, data }) {
 						url={`${config.url}/`}
 						description={`${getDescription()}`}
 						name={`${data.title} - ${config.name}`}
+						image={`${config.url}/${config.meta.image}`}
 					/>
 				</Head>
 				<main>

@@ -4,6 +4,7 @@ var exports = (module.exports = {
 	meta: {
 		name: "Maraho - next.js based blog framework.",
 		description: "Maraho is an Next.js based blog system.",
+		image: "Maraho.png",
 	},
 	navbar: {
 		list: ["docs", "demos"],

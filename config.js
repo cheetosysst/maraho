@@ -12,7 +12,7 @@ var exports = (module.exports = {
 	author: {
 		provider: "github",
 		username: "cheetosysst",
-		name: "Maraho",
+		name: "張辰",
 		twitter: "Thect_36",
 	},
 	repo: {

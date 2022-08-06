@@ -40,19 +40,19 @@ export default function article({ id, article, markdown, data }) {
 						<div className="flex justify-start gap-4">
 							<span>Share:</span>
 							<TwitterShare
-								text="test"
+								text={`${data.title}`}
 								url={`${config.url}/${encodeURIComponent(
 									id
 								)}/${encodeURIComponent(article)}`}
 							/>
 							<FacebookShare
-								text="test"
+								text={`${data.title}`}
 								url={`${config.url}/${encodeURIComponent(
 									id
 								)}/${encodeURIComponent(article)}`}
 							/>
 							<RedditShare
-								text="test"
+								text={`${data.title}`}
 								url={`${config.url}/${encodeURIComponent(
 									id
 								)}/${encodeURIComponent(article)}`}

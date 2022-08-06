@@ -64,13 +64,13 @@ export default function Home({ category, markdown }) {
 								<div>
 									<AiOutlineStar className="fill-current inline-block first:inline-block first:align-middle" />
 									<span className="px-1">
-										{tempRepoData.data.stargazers_count}
+										{numberProcessing(tempRepoData.data.stargazers_count)}
 									</span>
 								</div>
 								<div>
 									<AiOutlineFork className="fill-current inline-block first:inline-block first:align-middle" />
 									<span className="px-1">
-										{tempRepoData.data.forks_count}
+										{numberProcessing(tempRepoData.data.forks_count)}
 									</span>
 								</div>
 							</div>

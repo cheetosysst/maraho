@@ -74,7 +74,7 @@ export default function Markdown(markdown) {
 				p({ node, inline, className, children, ...props }) {
 					return (
 						<p
-							className={`mb-3 ${
+							className={`my-5 ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -170,7 +170,7 @@ export default function Markdown(markdown) {
 							style={gruvboxDark}
 							language={match == null ? "text" : match[1]}
 							PreTag="div"
-							className="py-0 my-0 px-0 mx-0 shadow-xl hover:shadow-2xl transition-all rounded-xl mockup-code"
+							className="py-0 mt-0 mb-4 px-0 mx-0 shadow-xl hover:shadow-2xl transition-all rounded-xl mockup-code"
 							wrapLines={true}
 							showLineNumbers={true}
 							{...props}
@@ -180,9 +180,8 @@ export default function Markdown(markdown) {
 					) : (
 						<SyntaxHighlighter
 							style={gruvboxDark}
-							// PreTag="div"
 							language="text"
-							className={`py-0 my-0 px-0 mx-0 shadow-xl hover:shadow-2xl transition-all rounded-xl mockup-code`}
+							className={`py-0 mt-0 mb-4 px-0 mx-0 shadow-xl hover:shadow-2xl transition-all rounded-xl mockup-code`}
 							wrapLines={true}
 							showLineNumbers={true}
 							{...props}

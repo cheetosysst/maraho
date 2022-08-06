@@ -5,8 +5,13 @@ import Layout from "../../components/main.layout";
 import config from "../../config";
 import Markdown from "../../components/markdown.component";
 import MetaTags from "../../components/meta.component";
+import {
+	FacebookShare,
+	RedditShare,
+	TwitterShare,
+} from "../../components/share.components";
 
-export default function article({ article, markdown, data }) {
+export default function article({ id, article, markdown, data }) {
 	const getDescription = () => {
 		if (data.description !== undefined && data.description !== "")
 			return data.description;
@@ -29,9 +34,32 @@ export default function article({ article, markdown, data }) {
 					/>
 				</Head>
 				<main>
-					<div className="container mx-auto py-10 md:px-20 px-5">
+					<article className="container mx-auto py-10 md:px-20 px-5">
 						<Markdown markdown={markdown} />
-					</div>
+						<div className="divider" />
+						<div className="flex justify-start gap-4">
+							<span>Share:</span>
+							<TwitterShare
+								text="test"
+								url={`${config.url}/${encodeURIComponent(
+									id
+								)}/${encodeURIComponent(article)}`}
+							/>
+							<FacebookShare
+								text="test"
+								url={`${config.url}/${encodeURIComponent(
+									id
+								)}/${encodeURIComponent(article)}`}
+							/>
+							<RedditShare
+								text="test"
+								url={`${config.url}/${encodeURIComponent(
+									id
+								)}/${encodeURIComponent(article)}`}
+							/>
+						</div>
+					</article>
+					<footer></footer>
 				</main>
 			</Layout>
 		</>

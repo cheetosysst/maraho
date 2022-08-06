@@ -12,6 +12,10 @@ This is a demo of markdown render result.
 
 ##### Headings 5
 
+## Image
+
+![alt](/Maraho.png)
+
 ## Lists
 
 ### List with "-"

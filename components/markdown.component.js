@@ -110,7 +110,7 @@ export default function Markdown(markdown) {
 							} ${className !== undefined ? className : ""} ${
 								Number.parseInt(props.depth) ? "" : "[&>*]:pb-2"
 							}`}
-							{...props}
+							ordered={props.ordered.toString()}
 						>
 							{children}
 						</ul>
@@ -124,7 +124,7 @@ export default function Markdown(markdown) {
 							} ${className !== undefined ? className : ""} ${
 								Number.parseInt(props.depth) ? "" : "[&>*]:pb-2"
 							}`}
-							{...props}
+							ordered={props.ordered.toString()}
 						>
 							{children}
 						</ol>
@@ -136,7 +136,7 @@ export default function Markdown(markdown) {
 							className={`${
 								className !== undefined ? className : ""
 							}`}
-							{...props}
+							ordered={props.ordered.toString()}
 						>
 							{children}
 						</li>
@@ -245,10 +245,7 @@ export default function Markdown(markdown) {
 						<td
 							className={`hover bg-neutral ${
 								className === undefined ? "" : className
-							} ${
-								props.isHeader ? "" : "hover"
-							}`}
-							{...props}
+							} ${props.isHeader ? "isheader" : ""}`}
 						>
 							{children}
 						</td>

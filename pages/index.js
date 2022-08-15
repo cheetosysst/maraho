@@ -18,6 +18,7 @@ import { AiOutlineFork } from "@react-icons/all-files/ai/AiOutlineFork";
 import { MdLanguage } from "@react-icons/all-files/md/MdLanguage";
 import Markdown from "../components/markdown.component";
 import MetaTags from "../components/meta.component";
+import { sitemap } from "../components/xml";
 
 export default function Home({ category, markdown }) {
 	const [avatar, setAvatar] = useState("/defaultuser.png");
@@ -64,13 +65,17 @@ export default function Home({ category, markdown }) {
 								<div>
 									<AiOutlineStar className="fill-current inline-block first:inline-block first:align-middle" />
 									<span className="px-1">
-										{numberProcessing(tempRepoData.data.stargazers_count)}
+										{numberProcessing(
+											tempRepoData.data.stargazers_count
+										)}
 									</span>
 								</div>
 								<div>
 									<AiOutlineFork className="fill-current inline-block first:inline-block first:align-middle" />
 									<span className="px-1">
-										{numberProcessing(tempRepoData.data.forks_count)}
+										{numberProcessing(
+											tempRepoData.data.forks_count
+										)}
 									</span>
 								</div>
 							</div>
@@ -239,6 +244,42 @@ export function getStaticProps() {
 	const markdown = fs.readFileSync(
 		path.join(process.cwd(), "content", "index.md")
 	);
+
+	const articles = [
+		...new Set(
+			[].concat(
+				...fs
+					.readdirSync("content")
+					.filter((item) => item.slice(-3) !== ".md")
+					.map((item) =>
+						fs
+							.readdirSync(path.join("content", item))
+							.filter((file) => file.slice(-5) !== ".json")
+							.map((file) => {
+								return {
+									date: fs.statSync(
+										path.join(
+											"content",
+											item,
+											file,
+											"index.md"
+										),
+										(err, stat) => {}
+									).mtime,
+									path:
+										config.url +
+										"/" +
+										path.join(
+											encodeURIComponent(item),
+											encodeURIComponent(file)
+										),
+								};
+							})
+					)
+			)
+		),
+	];
+	sitemap(articles);
 
 	return {
 		props: {

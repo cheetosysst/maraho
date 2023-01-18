@@ -13,92 +13,52 @@ import { VscGitCommit } from "@react-icons/all-files/vsc/VscGitCommit";
 import { AiOutlineGithub } from "@react-icons/all-files/ai/AiOutlineGithub";
 import { AiOutlineTwitter } from "@react-icons/all-files/ai/AiOutlineTwitter";
 import { AiOutlineLinkedin } from "@react-icons/all-files/ai/AiOutlineLinkedin";
-import { AiOutlineStar } from "@react-icons/all-files/ai/AiOutlineStar";
-import { AiOutlineFork } from "@react-icons/all-files/ai/AiOutlineFork";
-import { MdLanguage } from "@react-icons/all-files/md/MdLanguage";
 import Markdown from "../components/markdown.component";
 import MetaTags from "../components/meta.component";
 import { sitemap, rss } from "../components/xml";
+import RepoCard from "../components/repoCard.component";
 
-export default function Home({ category, markdown }) {
-	const [avatar, setAvatar] = useState("/defaultuser.png");
-	const [username, setUsername] = useState("Unknown");
-	const [github, setGithub] = useState("/");
+export default function Home({ category, markdown, repoData, userData }) {
+	const [username, setUsername] = useState("");
 	const [twitter, setTwitter] = useState("/");
+	const [avatar, setAvatar] = useState("/defaultuser.png");
+	const [github, setGithub] = useState("/");
 	const [repos, setRepos] = useState(0);
 	const [followers, setFollowers] = useState(0);
 	const [commits, setCommits] = useState(0);
 	const [pinnedRepos, setPinnedRepos] = useState();
 
-	useEffect(() => {
-		const getRepoPromise = new Promise(async (res, rej) => {
-			let tempPinnedRepos = [];
-			for (let i = 0; i < config.repo.repos.length; i++) {
-				const repoName = config.repo.repos[i].name.split("/");
-				const tempRepoData = await getRepo(repoName[0], repoName[1]);
-				tempPinnedRepos.push(
-					<Link
-						href={
-							"https://github.com/" + tempRepoData.data.full_name
-						}
-						key={"pinned_repo_" + i}
-					>
-						<div className="card py-3 px-6 group bg-base-100 shadow-lg hover:shadow-xl transition-all cursor-pointer">
-							<div className="card-title text-neutral-content text-[1em]">
-								<AiOutlineDatabase />
-								<div className="group-hover:text-primary transition-all duration-200">
-									{tempRepoData.data.full_name}
-								</div>
-							</div>
-							<div className="card-body p-0 mt-1 text-sm text-base-content/70 group-hover:text-base-content/100 transition-all duration-200">
-								{tempRepoData.data.description}
-							</div>
-							<div className="card-actions mt-1 text-sm text-base-content/70 justify-left gap-10">
-								<div>
-									<MdLanguage className="fill-current inline-block first:inline-block first:align-middle" />
-									<span className="px-1">
-										{tempRepoData.data.language === null
-											? "None"
-											: tempRepoData.data.language}
-									</span>
-								</div>
-								<div>
-									<AiOutlineStar className="fill-current inline-block first:inline-block first:align-middle" />
-									<span className="px-1">
-										{numberProcessing(
-											tempRepoData.data.stargazers_count
-										)}
-									</span>
-								</div>
-								<div>
-									<AiOutlineFork className="fill-current inline-block first:inline-block first:align-middle" />
-									<span className="px-1">
-										{numberProcessing(
-											tempRepoData.data.forks_count
-										)}
-									</span>
-								</div>
-							</div>
-						</div>
-					</Link>
-				);
-			}
-			res(tempPinnedRepos);
-		});
+	const [repo, setRepo] = useState(repoData);
+	const [user, setUser] = useState(userData);
 
-		Promise.all([getUser(config.author.username), getRepoPromise]).then(
-			(data) => {
-				setAvatar(data[0].avatar);
-				setUsername(data[0].username);
-				setGithub(data[0].url);
-				if (config.author.twitter)
-					setTwitter("https://twitter.com/" + config.author.twitter);
-				setRepos(data[0].repositories);
-				setFollowers(data[0].followers);
-				setCommits(data[0].commits);
-				setPinnedRepos(data[1]);
-			}
-		);
+	const getRepoCard = new Promise(async (res, rej) => {
+		let tempPinnedRepos = [];
+		for (let i = 0; i < config.repo.repos.length; i++) {
+			const repoName = config.repo.repos[i].name.split("/");
+			const tempRepoData = await getRepo(repoName[0], repoName[1]);
+			const card = (
+				<RepoCard
+					key={`repoCard-${repoName}`}
+					fullname={tempRepoData.data.full_name}
+					description={tempRepoData.data.description}
+					language={tempRepoData.data.language}
+					stars={tempRepoData.data.stargazers_count}
+					forks={tempRepoData.data.forks}
+				/>
+			);
+			tempPinnedRepos.push(card);
+		}
+		res(tempPinnedRepos);
+	});
+
+	useEffect(() => {
+		Promise.all([getRepoCard]).then((data) => setRepo(data));
+	}, []);
+
+	useEffect(() => {
+		Promise.all([getUser(config.author.username)]).then((data) => {
+			setUser(data[0]);
+		});
 	}, []);
 
 	const githubAvatarLoader = ({ src, width, quality }) => {
@@ -126,8 +86,7 @@ export default function Home({ category, markdown }) {
 								<div className="block">
 									<Image
 										className="rounded-xl shadow-lg"
-										src={avatar}
-										// loader={githubAvatarLoader}
+										src={user.avatar}
 										layout="responsive"
 										width={256}
 										height={256}
@@ -138,7 +97,7 @@ export default function Home({ category, markdown }) {
 									{config.author.name} ({username})
 								</p>
 								<div className="flex justify-center gap-4">
-									<Link href={github} passHref>
+									<Link href={user.url} passHref>
 										<a className="text-3xl cursor-pointer rounded-lg hover:bg-base-content/25 p-1 transition-all">
 											<AiOutlineGithub />
 										</a>
@@ -148,7 +107,7 @@ export default function Home({ category, markdown }) {
 											<AiOutlineTwitter />
 										</a>
 									</Link>
-									<Link href={github} passHref>
+									<Link href={""} passHref>
 										<a className="text-3xl cursor-pointer rounded-lg hover:bg-base-content/25 p-1 transition-all">
 											<AiOutlineLinkedin />
 										</a>
@@ -175,7 +134,9 @@ export default function Home({ category, markdown }) {
 												followers
 											</div>
 											<div className="stat-value text-primary-focus group-hover:text-info-content transition-all duration-300">
-												{numberProcessing(followers)}
+												{numberProcessing(
+													user.followers
+												)}
 											</div>
 										</div>
 									</Link>
@@ -194,7 +155,9 @@ export default function Home({ category, markdown }) {
 												repositories
 											</div>
 											<div className="stat-value text-primary-focus group-hover:text-info-content  transition-all duration-300">
-												{numberProcessing(repos)}
+												{numberProcessing(
+													user.repositories
+												)}
 											</div>
 										</div>
 									</Link>
@@ -213,7 +176,7 @@ export default function Home({ category, markdown }) {
 												commits
 											</div>
 											<div className="stat-value text-primary-focus group-hover:text-info-content  transition-all duration-300">
-												{numberProcessing(commits)}
+												{numberProcessing(user.commits)}
 											</div>
 										</div>
 									</Link>
@@ -222,7 +185,7 @@ export default function Home({ category, markdown }) {
 									Top Repos
 								</p>
 								<div className="grid xl:grid-cols-2 gap-2 grid-cols-1">
-									{pinnedRepos}
+									{repo}
 								</div>
 							</div>
 						</div>
@@ -239,11 +202,29 @@ export default function Home({ category, markdown }) {
 	);
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
 	const category = fs.readdirSync(path.join(process.cwd(), "content"));
 	const markdown = fs.readFileSync(
 		path.join(process.cwd(), "content", "index.md")
 	);
+
+	const repoData = [];
+
+	for (let i = 0; i < config.repo.repos.length; i++) {
+		const repoName = config.repo.repos[i].name.split("/");
+		const repoResponse = await getRepo(repoName[0], repoName[1]);
+		repoData.push[
+			{
+				fullname: repoResponse.data.full_name,
+				description: repoResponse.data.description,
+				language: repoResponse.data.language,
+				stars: repoResponse.data.stargazers_count,
+				forks: repoResponse.data.forks_count,
+			}
+		];
+	}
+
+	const userData = await getUser(config.author.username);
 
 	sitemap();
 	rss();
@@ -252,6 +233,8 @@ export function getStaticProps() {
 		props: {
 			category,
 			markdown: markdown.toString(),
+			repoData,
+			userData,
 		},
 	};
 }

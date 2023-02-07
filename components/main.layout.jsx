@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import config from "../config";
-import Navbar from "./navbar.component.js";
+import Navbar from "./navbar.component.jsx";
 
 export default function Layout({ children }) {
 	const [links, setLinks] = useState([]);

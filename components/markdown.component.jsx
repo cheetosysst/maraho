@@ -195,20 +195,22 @@ export default function Markdown(markdown) {
 				},
 				table({ node, inline, className, children, ...props }) {
 					return (
-						<table
-							className={`table shadow-xl hover:shadow-2xl transition-all rounded-2xl overflow-hidden mb-4 ${
-								className === undefined ? "" : className
-							}`}
-							{...props}
-						>
-							{children}
-						</table>
+						<div className=" rounded-lg overflow-x-scroll mb-4">
+							<table
+								className={`table w-full ${
+									className === undefined ? "" : className
+								}`}
+								{...props}
+							>
+								{children}
+							</table>
+						</div>
 					);
 				},
 				thead({ node, inline, className, children, ...props }) {
 					return (
 						<thead
-							className={`border-0 border-b-1 border-base-content/25 ${
+							className={`${
 								className === undefined ? "" : className
 							}`}
 							{...props}
@@ -220,9 +222,9 @@ export default function Markdown(markdown) {
 				tr({ node, inline, className, children, ...props }) {
 					return (
 						<tr
-							className={`even:bg-neutral odd:bg-neutral-focus ${
-								props.isHeader ? "" : "hover"
-							} ${className === undefined ? "" : className}`}
+							className={`${
+								className === undefined ? "" : className
+							}`}
 							// No props here, "the isHeader" prop is rejected by React.
 						>
 							{children}
@@ -232,7 +234,7 @@ export default function Markdown(markdown) {
 				th({ node, inline, className, children, ...props }) {
 					return (
 						<th
-							className={`hover bg-neutral-focus ${
+							className={`${
 								className === undefined ? "" : className
 							}`}
 						>
@@ -243,7 +245,7 @@ export default function Markdown(markdown) {
 				td({ node, inline, className, children, ...props }) {
 					return (
 						<td
-							className={`hover bg-neutral ${
+							className={` ${
 								className === undefined ? "" : className
 							} ${props.isHeader ? "isheader" : ""}`}
 						>

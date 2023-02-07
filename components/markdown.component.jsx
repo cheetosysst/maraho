@@ -144,14 +144,14 @@ export default function Markdown(markdown) {
 				},
 				a({ node, inline, className, children, href, ...props }) {
 					return (
-						<Link href={href} passHref {...props}>
-							<a
-								className={`text-primary hover:text-primary-focus hover:shadow-sm transition-all duration-100 px-${
-									Number.parseInt(props.depth) * 4
-								} ${className !== undefined ? className : ""}`}
-							>
-								{children[0]}
-							</a>
+						<Link
+							href={href}
+							className={`text-primary hover:text-primary-focus hover:shadow-sm transition-all duration-100 px-${
+								Number.parseInt(props.depth) * 4
+							} ${className !== undefined ? className : ""}`}
+							{...props}
+						>
+							{children[0]}
 						</Link>
 					);
 				},

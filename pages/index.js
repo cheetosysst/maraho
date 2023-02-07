@@ -48,12 +48,12 @@ export default function Home({}) {
 						<div className="mt-10">
 							<SocialLinks
 								links={{
-									linkedin:config.links.linkedin,
-									facebook:config.links.facebook,
-									twitter:config.links.twitter,
-									youtube:config.links.twitter,
-									mastodon:config.links.mastodon,
-									github:config.links.github,
+									linkedin: config.links.linkedin,
+									facebook: config.links.facebook,
+									twitter: config.links.twitter,
+									youtube: config.links.twitter,
+									mastodon: config.links.mastodon,
+									github: config.links.github,
 								}}
 								linkedin={config.links.linkedin}
 								facebook={config.links.facebook}

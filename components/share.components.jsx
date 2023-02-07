@@ -1,10 +1,11 @@
 import Link from "next/link";
 function ShareButton({ url, name }) {
 	return (
-		<Link href={url} passHref>
-			<a className="hover:text-primary transition-all duration-200">
-				{name}
-			</a>
+		<Link
+			href={url}
+			className="hover:text-primary transition-all duration-200"
+		>
+			{name}
 		</Link>
 	);
 }

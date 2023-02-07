@@ -15,7 +15,7 @@ var exports = (module.exports = {
 		username: "cheetosysst",
 		name: "張辰",
 		twitter: "Thect_36",
-		avatar: "maraho_avatar.png",
+		avatar: "/maraho_avatar.png",
 	},
 	links: {
 		linkedin: "#",

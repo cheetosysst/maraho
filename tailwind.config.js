@@ -17,12 +17,18 @@ module.exports = {
 			constant: "#D2A6FF",
 			operator: "#F29668",
 		},
+		container: {
+			padding: {
+				DEFAULT: "1rem",
+				sm: "2rem",
+				lg: "4rem",
+				xl: "5rem",
+				"2xl": "6rem",
+			},
+		},
 		extend: {},
 	},
-	plugins: [
-		require("daisyui"),
-		require("@tailwindcss/typography"),
-	],
+	plugins: [require("daisyui"), require("@tailwindcss/typography")],
 	daisyui: {
 		themes: ["halloween", "light"],
 	},

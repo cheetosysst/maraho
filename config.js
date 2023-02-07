@@ -1,6 +1,7 @@
 var exports = (module.exports = {
 	name: "Maraho",
 	url: "https://maraho.thect.cc",
+	description: "Static Blog Generator",
 	meta: {
 		name: "Maraho - next.js based blog framework.",
 		description: "Maraho is an Next.js based blog system.",
@@ -14,21 +15,14 @@ var exports = (module.exports = {
 		username: "cheetosysst",
 		name: "張辰",
 		twitter: "Thect_36",
+		avatar: "maraho_avatar.png",
 	},
-	repo: {
-		repos: [
-			{
-				name: "cheetosysst/maraho",
-			},
-			{
-				name: "vercel/next.js",
-			},
-			{
-				name: "saadeghi/daisyui",
-			},
-			{
-				name: "tailwindlabs/tailwindcss",
-			},
-		],
-	},
+	links: {
+		linkedin: "#",
+		youtube: "#",
+		facebook:"#",
+		twitter: "https://twitter.com/Thect_36",
+		mastodon: "https://g0v.social/@thect",
+		github: "https://github.com/cheetosysst/maraho",
+	}
 });

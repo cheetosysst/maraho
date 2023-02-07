@@ -22,7 +22,7 @@ export default function Navbar() {
 	return (
 		<>
 			<div className="container mx-auto">
-				<div className="navbar bg-base-300 mt-3 rounded-xl shadow">
+				<div className="navbar mt-3">
 					<div className="flex-none md:hidden">
 						<label
 							htmlFor="my-drawer"

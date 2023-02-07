@@ -34,9 +34,9 @@ export default function article({ id, article, markdown, data }) {
 					/>
 				</Head>
 				<main>
-					<article className="container mx-auto py-10 md:px-20 px-5">
+					<article className="container xl:px-64 lg:px-40 md:px-24 px-10 mx-auto py-20">
 						<Markdown markdown={markdown} />
-						<div className="divider" />
+						<div className="divider mt-10"/>
 						<div className="flex justify-start gap-4">
 							<span>Share:</span>
 							<TwitterShare

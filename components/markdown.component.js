@@ -14,7 +14,7 @@ export default function Markdown(markdown) {
 				h1({ node, inline, className, children, ...props }) {
 					return (
 						<h1
-							className={`text-5xl mb-4 border-b-2 pb-4 border-base-content/10 ${
+							className={`xl:text-5xl text-4xl mb-4 border-b-2 pb-4 border-base-content/10 ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -26,7 +26,7 @@ export default function Markdown(markdown) {
 				h2({ node, inline, className, children, ...props }) {
 					return (
 						<h2
-							className={`text-4xl mt-8 mb-4 border-b-2 pb-2 border-base-content/10 ${
+							className={`text-4xl mt-12 mb-4 border-b-2 pb-2 border-base-content/10 ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -74,7 +74,7 @@ export default function Markdown(markdown) {
 				p({ node, inline, className, children, ...props }) {
 					return (
 						<p
-							className={`my-5 ${
+							className={`my-5 text-lg font-light ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}

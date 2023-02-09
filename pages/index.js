@@ -7,6 +7,7 @@ import Image from "next/image";
 import MetaTags from "../components/meta.component";
 import { sitemap, rss } from "../components/xml";
 import SocialLinks from "../components/social.component";
+import Container from "../components/container.component";
 
 export default function Home({}) {
 	return (
@@ -24,8 +25,8 @@ export default function Home({}) {
 
 			<main>
 				<Layout>
-					<div className="container mx-auto py-10 lg:px-20 md:px-10 px-5">
-						<div className="flex justify-center mt-[10%]">
+					<Container>
+						<div className="flex justify-center md:mt-[20%] mt-[30%]">
 							<div className="avatar drop-shadow-xl overflow-hidden rounded-full select-none">
 								<Image
 									src={config.author.avatar}
@@ -63,7 +64,7 @@ export default function Home({}) {
 								github={config.links.github}
 							/>
 						</div>
-					</div>
+					</Container>
 				</Layout>
 			</main>
 		</>

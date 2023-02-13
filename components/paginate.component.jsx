@@ -3,8 +3,8 @@ import Router from "next/router";
 function PaginateButton({ text, action, active }) {
 	return (
 		<button
-			className={`btn hover:btn-primary shadow-sm ${
-				active ? "btn-primary" : ""
+			className={`btn bg-white/5 hover:bg-white/10 border-0 ${
+				active ? "bg-white/10" : ""
 			}`}
 			onClick={action}
 		>

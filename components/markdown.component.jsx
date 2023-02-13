@@ -14,7 +14,7 @@ export default function Markdown(markdown) {
 				h1({ node, inline, className, children, ...props }) {
 					return (
 						<h1
-							className={`text-5xl mb-4 border-b-2 pb-4 border-base-content/10 ${
+							className={`xl:text-5xl text-4xl mb-4 border-b-2 pb-4 border-base-content/10 ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -26,7 +26,7 @@ export default function Markdown(markdown) {
 				h2({ node, inline, className, children, ...props }) {
 					return (
 						<h2
-							className={`text-4xl mt-8 mb-4 border-b-2 pb-2 border-base-content/10 ${
+							className={`text-4xl mt-12 mb-4 border-b-2 pb-2 border-base-content/10 ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -74,7 +74,7 @@ export default function Markdown(markdown) {
 				p({ node, inline, className, children, ...props }) {
 					return (
 						<p
-							className={`my-5 ${
+							className={`my-5 text-lg font-light ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -144,14 +144,14 @@ export default function Markdown(markdown) {
 				},
 				a({ node, inline, className, children, href, ...props }) {
 					return (
-						<Link href={href} passHref {...props}>
-							<a
-								className={`text-primary hover:text-primary-focus hover:shadow-sm transition-all duration-100 px-${
-									Number.parseInt(props.depth) * 4
-								} ${className !== undefined ? className : ""}`}
-							>
-								{children[0]}
-							</a>
+						<Link
+							href={href}
+							className={`text-primary hover:text-primary-focus hover:shadow-sm transition-all duration-100 px-${
+								Number.parseInt(props.depth) * 4
+							} ${className !== undefined ? className : ""}`}
+							{...props}
+						>
+							{children[0]}
 						</Link>
 					);
 				},
@@ -160,7 +160,7 @@ export default function Markdown(markdown) {
 
 					if (inline)
 						return (
-							<code className="bg-[#1d2021] hover:bg-primary text-[#ebdbb2] transition-all duration-300 py-[0.1em] px-[0.3em] rounded-md shadow-xl hover:shadow-2xl">
+							<code className="bg-[#1d2021] border-2 border-base-content/5 text-[#ebdbb2] text-[0.9em] transition-all duration-300 py-[0.1em] px-[0.3em] rounded-md shadow-xl hover:shadow-2xl">
 								{String(children).replace(/\n$/, "")}
 							</code>
 						);
@@ -195,20 +195,22 @@ export default function Markdown(markdown) {
 				},
 				table({ node, inline, className, children, ...props }) {
 					return (
-						<table
-							className={`table shadow-xl hover:shadow-2xl transition-all rounded-2xl overflow-hidden mb-4 ${
-								className === undefined ? "" : className
-							}`}
-							{...props}
-						>
-							{children}
-						</table>
+						<div className="table-fixed table-zebra rounded-md border-2 m-[-1px] border-base-content/10 overflow-x-scroll mb-4">
+							<table
+								className={`table w-full ${
+									className === undefined ? "" : className
+								}`}
+								{...props}
+							>
+								{children}
+							</table>
+						</div>
 					);
 				},
 				thead({ node, inline, className, children, ...props }) {
 					return (
 						<thead
-							className={`border-0 border-b-1 border-base-content/25 ${
+							className={`${
 								className === undefined ? "" : className
 							}`}
 							{...props}
@@ -220,9 +222,9 @@ export default function Markdown(markdown) {
 				tr({ node, inline, className, children, ...props }) {
 					return (
 						<tr
-							className={`even:bg-neutral odd:bg-neutral-focus ${
-								props.isHeader ? "" : "hover"
-							} ${className === undefined ? "" : className}`}
+							className={`${
+								className === undefined ? "" : className
+							}`}
 							// No props here, "the isHeader" prop is rejected by React.
 						>
 							{children}
@@ -232,7 +234,7 @@ export default function Markdown(markdown) {
 				th({ node, inline, className, children, ...props }) {
 					return (
 						<th
-							className={`hover bg-neutral-focus ${
+							className={`${
 								className === undefined ? "" : className
 							}`}
 						>
@@ -243,7 +245,7 @@ export default function Markdown(markdown) {
 				td({ node, inline, className, children, ...props }) {
 					return (
 						<td
-							className={`hover bg-neutral ${
+							className={`${
 								className === undefined ? "" : className
 							} ${props.isHeader ? "isheader" : ""}`}
 						>

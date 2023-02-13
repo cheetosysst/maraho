@@ -8,6 +8,7 @@ import fs from "fs";
 import path from "path";
 import Paginate from "../../components/paginate.component";
 import MetaTags from "../../components/meta.component";
+import Container from "../../components/container.component";
 
 export default function Category({ id, articles, category }) {
 	const [articleCards, setArticleCards] = useState([]);
@@ -20,48 +21,31 @@ export default function Category({ id, articles, category }) {
 	}, [query.page]);
 
 	useEffect(() => {
-		let tempList = [];
+		const articleCards = [];
 		for (
 			let i = 0 + (page - 1) * 10;
 			i < articles.length + (page - 1) * 10;
 			i++
 		) {
 			if (articles[i] === undefined) break;
-			let tagList = [];
-			let time = new Date(articles[i].timestamp);
-			for (let j = 0; j < articles[i].tags.length; j++) {
-				tagList.push(
-					<div
-						key={
-							"tag-" +
-							articles[i].path +
-							"-" +
-							articles[i].tags[j]
-						}
-						className="badge badge-primary mr-1 p-3 group-hover:bg-base-100 border-none group-hover:text-base-content select-none"
-					>
-						#{articles[i].tags[j]}
-					</div>
-				);
-			}
-			tempList.push(
-				<Link href={"/" + id + "/" + articles[i].path}>
-					<div
-						key={"articles-" + i}
-						className={`group ${
-							i % 2 ? "bg-neutral-focus" : ""
-						} hover:bg-primary hover:text-primary-content duration-300 p-5 cursor-pointer`}
-					>
-						<div className="flex justify-between">
-							<div className="text-2xl">{articles[i].title}</div>
-							{time.toLocaleDateString("zh-TW")}
-						</div>
-						<div className="flex justify-start mt-2">{tagList}</div>
-					</div>
-				</Link>
+			const time = new Date(articles[i].timestamp);
+			const tagList = articles[i].tags.map((data) => (
+				<div key={`tag-${articles[i].path}-${data}`} className="mr-2">
+					#{data}
+				</div>
+			));
+
+			articleCards.push(
+				<ArticleCard
+					href={`/${id}/${articles[i].path}`}
+					title={articles[i].title}
+					tags={tagList}
+					time={time}
+					key={"articles-" + i}
+				/>
 			);
 		}
-		setArticleCards(tempList);
+		setArticleCards(articleCards);
 	}, [articles, id, page]);
 
 	return (
@@ -79,15 +63,11 @@ export default function Category({ id, articles, category }) {
 			</Head>
 			<Layout>
 				<main>
-					<div className="container w-9/12 mx-auto my-4 rounded-xl pt-10 pb-4 select-none">
-						<h2 className="text-4xl text-primary">
-							{category.name}
-						</h2>
+					<Container className="my-4 pt-10 pb-4 select-none">
+						<h2 className="text-4xl">{category.name}</h2>
 						<p>{category.description}</p>
-					</div>
-					<div className="container w-9/12 mx-auto bg-neutral rounded-xl shadow-xl hover:shadow-2xl duration-300 transition-all overflow-hidden">
-						{articleCards}
-					</div>
+					</Container>
+					<Container>{articleCards}</Container>
 					<Paginate
 						start={1}
 						end={articles.length / 10}
@@ -97,6 +77,29 @@ export default function Category({ id, articles, category }) {
 				</main>
 			</Layout>
 		</>
+	);
+}
+
+function ArticleCard({ href, title, tags, time, className, ...props }) {
+	return (
+		<Link href={href}>
+			<div
+				className={`group rounded-md mb-5 bg-white/5 hover:bg-white/10 duration-300 p-5 cursor-pointer ${className}`}
+				{...props}
+			>
+				<div className="flex justify-between">
+					<div className="grid">
+						<div className="col-12 md:col-6 md:text-2xl text-xl mr-5">
+							{title}
+						</div>
+						<div className="flex flex-nowrap md:w-auto w-10 justify-start mt-2">
+							{tags}
+						</div>
+					</div>
+					{time.toLocaleDateString("zh-TW")}
+				</div>
+			</div>
+		</Link>
 	);
 }
 
@@ -135,9 +138,9 @@ export async function getStaticProps({ params }) {
 		return item !== "category.json";
 	});
 
-	let articleData = [];
+	const articleData = [];
 	for (let i = 0; i < articles.length; i++) {
-		let articleJson = fs.readFileSync(
+		const articleJson = fs.readFileSync(
 			path.join(
 				process.cwd(),
 				"content",
@@ -146,7 +149,7 @@ export async function getStaticProps({ params }) {
 				"article.json"
 			)
 		);
-		let articleJsonParsed = JSON.parse(articleJson.toString());
+		const articleJsonParsed = JSON.parse(articleJson.toString());
 		articleJsonParsed["path"] = articles[i];
 		articleData.push(articleJsonParsed);
 	}

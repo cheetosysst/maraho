@@ -10,6 +10,7 @@ import {
 	RedditShare,
 	TwitterShare,
 } from "../../components/share.components";
+import Container from "../../components/container.component";
 
 export default function article({ id, article, markdown, data }) {
 	const getDescription = () => {
@@ -21,48 +22,47 @@ export default function article({ id, article, markdown, data }) {
 	};
 
 	return (
-		<>
-			<Layout>
-				<Head>
-					<title>{`${data.title} - ${config.name}`}</title>
-					<MetaTags
-						title={`${data.title} - ${config.name}`}
-						url={`${config.url}/`}
-						description={`${getDescription()}`}
-						name={`${data.title} - ${config.name}`}
-						image={`${config.url}/${config.meta.image}`}
-					/>
-				</Head>
+		<Layout>
+			<Head>
+				<title>{`${data.title} - ${config.name}`}</title>
+				<MetaTags
+					title={`${data.title} - ${config.name}`}
+					url={`${config.url}/`}
+					description={`${getDescription()}`}
+					name={`${data.title} - ${config.name}`}
+					image={`${config.url}/${config.meta.image}`}
+				/>
+			</Head>
+			<Container>
 				<main>
-					<article className="container mx-auto py-10 md:px-20 px-5">
+					<article className="md:pt-10 pt-0 pb-10">
 						<Markdown markdown={markdown} />
-						<div className="divider" />
-						<div className="flex justify-start gap-4">
-							<span>Share:</span>
-							<TwitterShare
-								text={`${data.title}`}
-								url={`${config.url}/${encodeURIComponent(
-									id
-								)}/${encodeURIComponent(article)}`}
-							/>
-							<FacebookShare
-								text={`${data.title}`}
-								url={`${config.url}/${encodeURIComponent(
-									id
-								)}/${encodeURIComponent(article)}`}
-							/>
-							<RedditShare
-								text={`${data.title}`}
-								url={`${config.url}/${encodeURIComponent(
-									id
-								)}/${encodeURIComponent(article)}`}
-							/>
-						</div>
 					</article>
-					<footer></footer>
+					<div className="divider" />
+					<div className="flex justify-start gap-4">
+						<span>Share:</span>
+						<TwitterShare
+							text={`${data.title}`}
+							url={`${config.url}/${encodeURIComponent(
+								id
+							)}/${encodeURIComponent(article)}`}
+						/>
+						<FacebookShare
+							text={`${data.title}`}
+							url={`${config.url}/${encodeURIComponent(
+								id
+							)}/${encodeURIComponent(article)}`}
+						/>
+						<RedditShare
+							text={`${data.title}`}
+							url={`${config.url}/${encodeURIComponent(
+								id
+							)}/${encodeURIComponent(article)}`}
+						/>
+					</div>
 				</main>
-			</Layout>
-		</>
+			</Container>
+		</Layout>
 	);
 }
 

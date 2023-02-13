@@ -21,8 +21,8 @@ function Error({ statusCode }) {
 					An error has occurred.
 				</p>
 				<p className="flex justify-center">
-					<Link href={"/"} passHref>
-						<a className="btn btn-primary mt-5">Home</a>
+					<Link href={"/"} className="btn btn-primary mt-5" passHref>
+						Home
 					</Link>
 				</p>
 			</div>

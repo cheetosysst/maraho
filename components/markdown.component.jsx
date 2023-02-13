@@ -160,7 +160,7 @@ export default function Markdown(markdown) {
 
 					if (inline)
 						return (
-							<code className="bg-[#1d2021] hover:bg-primary text-[#ebdbb2] transition-all duration-300 py-[0.1em] px-[0.3em] rounded-md shadow-xl hover:shadow-2xl">
+							<code className="bg-[#1d2021] border-2 border-base-content/5 text-[#ebdbb2] text-[0.9em] transition-all duration-300 py-[0.1em] px-[0.3em] rounded-md shadow-xl hover:shadow-2xl">
 								{String(children).replace(/\n$/, "")}
 							</code>
 						);
@@ -195,7 +195,7 @@ export default function Markdown(markdown) {
 				},
 				table({ node, inline, className, children, ...props }) {
 					return (
-						<div className=" rounded-lg overflow-x-scroll mb-4">
+						<div className="table-fixed table-zebra rounded-md border-2 m-[-1px] border-base-content/10 overflow-x-scroll mb-4">
 							<table
 								className={`table w-full ${
 									className === undefined ? "" : className
@@ -245,7 +245,7 @@ export default function Markdown(markdown) {
 				td({ node, inline, className, children, ...props }) {
 					return (
 						<td
-							className={` ${
+							className={`${
 								className === undefined ? "" : className
 							} ${props.isHeader ? "isheader" : ""}`}
 						>

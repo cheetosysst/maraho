@@ -33,6 +33,7 @@ export default function Home({}) {
 									alt="avatar"
 									width={128}
 									height={128}
+									className={`max-w-32 max-h-32`}
 								/>
 							</div>
 						</div>

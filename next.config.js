@@ -3,9 +3,9 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		loader: 'custom',
-		loaderFile: "./libs/loader.js"
-	  },
+		loader: "custom",
+		loaderFile: "./libs/loader.js",
+	},
 };
 
 module.exports = nextConfig;

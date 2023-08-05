@@ -87,7 +87,7 @@ function ArticleCard({ href, title, tags, time, className, ...props }) {
 				className={`group rounded-md mb-5 bg-white/5 hover:bg-white/10 duration-300 p-5 cursor-pointer ${className}`}
 				{...props}
 			>
-				<div className="flex justify-between">
+				<div className="flex justify-between items-center">
 					<div className="grid">
 						<p className="col-12 text-primary line-clamp-1 md:col-6 md:text-2xl text-xl">
 							{title}

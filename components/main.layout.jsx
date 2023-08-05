@@ -22,32 +22,11 @@ export default function Layout({ children }) {
 
 	return (
 		<>
-			<div className="drawer">
-				<input
-					id="my-drawer"
-					type="checkbox"
-					className="drawer-toggle"
-				/>
-				<div className="drawer-content pb-10">
-					<Navbar />
-					<div className="flex flex-row">
-						<div className="flex-grow"></div>
-						<div className="w-[90%] md:w-[80%] xl:w-[65%]">
-							{children}
-						</div>
-						<div className="flex-grow"></div>
-					</div>
-				</div>
-				<div className="drawer-side">
-					<label
-						htmlFor="my-drawer"
-						className="drawer-overlay"
-					></label>
-					<ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-						<h1 className="text-2xl ml-3 my-3">Category</h1>
-						{links}
-					</ul>
-				</div>
+			<Navbar />
+			<div className="flex flex-row">
+				<div className="flex-grow"></div>
+				<div className="w-[90%] md:w-[80%] xl:w-[65%]">{children}</div>
+				<div className="flex-grow"></div>
 			</div>
 		</>
 	);

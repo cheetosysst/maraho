@@ -8,10 +8,8 @@ import fs from "fs";
 import path from "path";
 import Paginate from "../../components/paginate.component";
 import MetaTags from "../../components/meta.component";
-import Container from "../../components/container.component";
 
 export default function Category({ id, articles, category }) {
-	const [articleCards, setArticleCards] = useState([]);
 	const [page, setPage] = useState(1);
 	const { query } = useRouter();
 
@@ -20,36 +18,33 @@ export default function Category({ id, articles, category }) {
 		setPage(Number(query.page));
 	}, [query.page]);
 
-	useEffect(() => {
-		const articleCards = [];
-		for (
-			let i = 0 + (page - 1) * 10;
-			i < articles.length + (page - 1) * 10;
-			i++
-		) {
-			if (articles[i] === undefined) break;
-			const time = new Date(articles[i].timestamp);
-			const tagList = articles[i].tags.map((data) => (
-				<div key={`tag-${articles[i].path}-${data}`} className="mr-2">
-					#{data}
-				</div>
-			));
+	const articleCards = [];
+	for (
+		let i = 0 + (page - 1) * 10;
+		i < articles.length + (page - 1) * 10;
+		i++
+	) {
+		if (articles[i] === undefined) break;
+		const time = new Date(articles[i].timestamp);
+		const tagList = articles[i].tags.map((data) => (
+			<span key={`tag-${articles[i].path}-${data}`} className="mr-2">
+				#{data}
+			</span>
+		));
 
-			articleCards.push(
-				<ArticleCard
-					href={`/${id}/${articles[i].path}`}
-					title={articles[i].title}
-					tags={tagList}
-					time={time}
-					key={"articles-" + i}
-				/>
-			);
-		}
-		setArticleCards(articleCards);
-	}, [articles, id, page]);
+		articleCards.push(
+			<ArticleCard
+				href={`/${id}/${articles[i].path}`}
+				title={articles[i].title}
+				tags={tagList}
+				time={time}
+				key={"articles-" + i}
+			/>
+		);
+	}
 
 	return (
-		<>
+		<Layout>
 			<Head>
 				<title>{`${category.name} - ${config.name}`}</title>
 				<meta name="robots" content="noindex,nofollow" />
@@ -61,22 +56,20 @@ export default function Category({ id, articles, category }) {
 					image={`${config.url}/${config.meta.image}`}
 				/>
 			</Head>
-			<Layout>
-				<main>
-					<Container className="my-4 pt-10 pb-4 select-none">
-						<h2 className="text-4xl">{category.name}</h2>
-						<p>{category.description}</p>
-					</Container>
-					<Container>{articleCards}</Container>
-					<Paginate
-						start={1}
-						end={articles.length / 10}
-						active={page}
-						path={id}
-					/>
-				</main>
-			</Layout>
-		</>
+			<main>
+				<div className="container mt-10 mb-8 select-none">
+					<h2 className="text-4xl">{category.name}</h2>
+					<p>{category.description}</p>
+				</div>
+				<div className="container">{articleCards}</div>
+				<Paginate
+					start={1}
+					end={articles.length / 10}
+					active={page}
+					path={id}
+				/>
+			</main>
+		</Layout>
 	);
 }
 

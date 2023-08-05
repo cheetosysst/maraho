@@ -33,35 +33,33 @@ export default function article({ id, article, markdown, data }) {
 					image={`${config.url}/${config.meta.image}`}
 				/>
 			</Head>
-			<Container>
-				<main>
-					<article className="md:pt-10 pt-0 pb-10">
-						<Markdown markdown={markdown} />
-					</article>
-					<div className="divider" />
-					<div className="flex justify-start gap-4">
-						<span>Share:</span>
-						<TwitterShare
-							text={`${data.title}`}
-							url={`${config.url}/${encodeURIComponent(
-								id
-							)}/${encodeURIComponent(article)}`}
-						/>
-						<FacebookShare
-							text={`${data.title}`}
-							url={`${config.url}/${encodeURIComponent(
-								id
-							)}/${encodeURIComponent(article)}`}
-						/>
-						<RedditShare
-							text={`${data.title}`}
-							url={`${config.url}/${encodeURIComponent(
-								id
-							)}/${encodeURIComponent(article)}`}
-						/>
-					</div>
-				</main>
-			</Container>
+			<main className="container mx-auto">
+				<article className="md:pt-10 pt-0 pb-10">
+					<Markdown markdown={markdown} />
+				</article>
+				<div className="divider" />
+				<div className="flex justify-start gap-4">
+					<span>Share:</span>
+					<TwitterShare
+						text={`${data.title}`}
+						url={`${config.url}/${encodeURIComponent(
+							id
+						)}/${encodeURIComponent(article)}`}
+					/>
+					<FacebookShare
+						text={`${data.title}`}
+						url={`${config.url}/${encodeURIComponent(
+							id
+						)}/${encodeURIComponent(article)}`}
+					/>
+					<RedditShare
+						text={`${data.title}`}
+						url={`${config.url}/${encodeURIComponent(
+							id
+						)}/${encodeURIComponent(article)}`}
+					/>
+				</div>
+			</main>
 		</Layout>
 	);
 }

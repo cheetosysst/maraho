@@ -1,6 +1,6 @@
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { gruvboxDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { a11yDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
@@ -14,7 +14,7 @@ export default function Markdown(markdown) {
 				h1({ node, inline, className, children, ...props }) {
 					return (
 						<h1
-							className={`xl:text-5xl text-4xl mb-4 border-b-2 pb-4 border-base-content/10 ${
+							className={`xl:text-5xl text-4xl mb-4 border-b-2 pb-4 text-primary border-base-content/10 ${
 								className !== undefined ? className : ""
 							}`}
 							{...props}
@@ -160,30 +160,28 @@ export default function Markdown(markdown) {
 
 					if (inline)
 						return (
-							<code className="bg-[#1d2021] border-2 border-base-content/5 text-[#ebdbb2] text-[0.9em] transition-all duration-300 py-[0.1em] px-[0.3em] rounded-md shadow-xl hover:shadow-2xl">
+							<code className="bg-white/5 text-base-content text-[0.9em] transition-all py-0.5 px-1 rounded-md font-mono">
 								{String(children).replace(/\n$/, "")}
 							</code>
 						);
 
 					return !inline && match ? (
 						<SyntaxHighlighter
-							style={gruvboxDark}
+							style={a11yDark}
 							language={match == null ? "text" : match[1]}
 							PreTag="div"
-							className="py-0 mt-0 mb-4 px-0 mx-0 shadow-xl hover:shadow-2xl transition-all rounded-xl mockup-code"
+							className="shadow-md hover:shadow-lg transition-all rounded-xl"
 							wrapLines={true}
-							showLineNumbers={true}
 							{...props}
 						>
 							{String(children).replace(/\n$/, "")}
 						</SyntaxHighlighter>
 					) : (
 						<SyntaxHighlighter
-							style={gruvboxDark}
+							style={a11yDark}
 							language="text"
-							className={`py-0 mt-0 mb-4 px-0 mx-0 shadow-xl hover:shadow-2xl transition-all rounded-xl mockup-code`}
+							className={`shadow-md hover:shadow-lg transition-all rounded-xl`}
 							wrapLines={true}
-							showLineNumbers={true}
 							{...props}
 						>
 							{String(children).replace(/\n$/, "")}

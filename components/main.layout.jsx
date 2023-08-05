@@ -30,7 +30,13 @@ export default function Layout({ children }) {
 				/>
 				<div className="drawer-content pb-10">
 					<Navbar />
-					{children}
+					<div className="flex flex-row">
+						<div className="flex-grow"></div>
+						<div className="w-[90%] md:w-[80%] xl:w-[65%]">
+							{children}
+						</div>
+						<div className="flex-grow"></div>
+					</div>
 				</div>
 				<div className="drawer-side">
 					<label

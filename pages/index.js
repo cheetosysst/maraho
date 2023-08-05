@@ -1,8 +1,6 @@
 import Head from "next/head";
 import config from "../config";
 import Layout from "../components/main.layout";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import MetaTags from "../components/meta.component";
 import { sitemap, rss } from "../components/xml";

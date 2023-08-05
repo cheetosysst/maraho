@@ -89,14 +89,16 @@ function ArticleCard({ href, title, tags, time, className, ...props }) {
 			>
 				<div className="flex justify-between">
 					<div className="grid">
-						<div className="col-12 md:col-6 md:text-2xl text-xl mr-5">
+						<p className="col-12 text-primary line-clamp-1 md:col-6 md:text-2xl text-xl">
 							{title}
-						</div>
-						<div className="flex flex-nowrap md:w-auto w-10 justify-start mt-2">
+						</p>
+						<p className="flex flex-nowrap line-clamp-1 md:w-auto w-full justify-start">
 							{tags}
-						</div>
+						</p>
 					</div>
-					{time.toLocaleDateString("zh-TW")}
+					<p className="text-neutral-content/60">
+						{time.toLocaleDateString("zh-TW")}
+					</p>
 				</div>
 			</div>
 		</Link>
@@ -125,18 +127,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	let articles = fs.readdirSync(
-		path.join(process.cwd(), "content", params.category)
-	);
+	const articles = fs
+		.readdirSync(path.join(process.cwd(), "content", params.category))
+		.filter((item) => {
+			return item !== "category.json";
+		});
 
 	const categoryDataRaw = fs.readFileSync(
 		path.join(process.cwd(), "content", params.category, "category.json")
 	);
 	const categoryData = JSON.parse(categoryDataRaw.toString());
-
-	articles = articles.filter((item) => {
-		return item !== "category.json";
-	});
 
 	const articleData = [];
 	for (let i = 0; i < articles.length; i++) {

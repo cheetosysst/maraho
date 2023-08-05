@@ -8,9 +8,7 @@ function Error({ statusCode }) {
 		<Layout>
 			<Head>
 				<title>
-					{statusCode ? statusCode : "Error"}
-					{" - "}
-					{config.name}
+					{`${config.name} - ${statusCode ? statusCode : "Error"}`}
 				</title>
 			</Head>
 			<div className="container mx-auto pt-10">

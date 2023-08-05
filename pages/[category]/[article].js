@@ -10,7 +10,6 @@ import {
 	RedditShare,
 	TwitterShare,
 } from "../../components/share.components";
-import Container from "../../components/container.component";
 
 export default function article({ id, article, markdown, data }) {
 	const getDescription = () => {

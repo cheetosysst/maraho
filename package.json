@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "next dev",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
     "export": "next export",
     "lint": "next lint",
     "manage": "node tools/manage.mjs"
@@ -14,7 +14,8 @@
     "@octokit/rest": "^19.0.3",
     "@react-icons/all-files": "^4.1.0",
     "@tailwindcss/typography": "^0.5.2",
-    "next": "^13.1.6",
+    "dayjs": "^1.11.13",
+    "next": "^14.2.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.7",

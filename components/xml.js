@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import config from "../config";
+import dayjs from "dayjs";
 
 const articles = article();
 
@@ -55,33 +56,10 @@ ${entries.join("\n")}
 }
 
 function getUFCDate(date) {
-	const months = {
-		Jan: "January",
-		Feb: "February",
-		Mar: "March",
-		Apr: "April",
-		May: "May",
-		Jun: "June",
-		Jul: "July",
-		Aug: "August",
-		Sep: "September",
-		Oct: "October",
-		Nov: "November",
-		Dec: "December",
-	};
-
-	const weekDay = date.toString().match(/Mon|Tue|Wed|Thu|Fri|Sat|Sun/)[0];
-	const day = date.toString().match(/[0-9]{1,2}/)[0];
-	const month =
-		months[
-			date
-				.toString()
-				.match(/Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/)[0]
-		];
-	const year = date.toString().match(/[0-9]{4}/)[0];
-	const time = date.toString().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)[0];
-	const timezone = date.toString().match(/[+-][0-9]{4}/)[0];
-	return `${weekDay}, ${day} ${month} ${year} ${time} ${timezone}`;
+	// Example previous output:    Mon, 2 January 2024 09:37:42 +0600
+	// 	DayJS output formatted to match, the docs are great: https://day.js.org/docs/en/display/format
+	const dayjsfmt = new dayjs(date).format('ddd, DD MMMM YYYY HH:mm:ss ZZ');
+	return dayjsfmt;
 }
 
 function article() {

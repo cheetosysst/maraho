@@ -80,7 +80,7 @@ function getUFCDate(date) {
 		];
 	const year = date.toString().match(/[0-9]{4}/)[0];
 	const time = date.toString().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)[0];
-	const timezone = date.toString().match(/\+[0-9]{4}/)[0];
+	const timezone = date.toString().match(/[+-][0-9]{4}/)[0];
 	return `${weekDay}, ${day} ${month} ${year} ${time} ${timezone}`;
 }
 

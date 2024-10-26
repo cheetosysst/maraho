@@ -56,10 +56,10 @@ ${entries.join("\n")}
 }
 
 function getUFCDate(date) {
-	// Example previous output:    Mon, 2 January 2024 09:37:42 +0600
-	// 	DayJS output formatted to match, the docs are great: https://day.js.org/docs/en/display/format
-	const dayjsfmt = new dayjs(date).format('ddd, DD MMMM YYYY HH:mm:ss ZZ');
-	return dayjsfmt;
+	// More info available at project-root/.env
+	const dayjsFmt = process.env.DAYJS_FORMAT || "YYYY-MM-DD HH:mm";
+	const formattedDate = new dayjs(date).format(dayjsFmt);
+	return formattedDate;
 }
 
 function article() {
